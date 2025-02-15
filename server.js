@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 });
 
 // Health check endpoint
-router.get("/health", async (req, res) => {
+app.get("/health", async (req, res) => {
   try {
     // Perform a simple database operation to check database health.
     await mongoose.connection.db.admin().ping();
