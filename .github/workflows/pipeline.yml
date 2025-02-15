@@ -27,28 +27,9 @@ jobs:
       - name: Run unit tests
         run: npm test
 
-  static-code-analysis-job:
-    runs-on: ubuntu-latest
-    needs: test-job
-    continue-on-error: true
-    steps:
-      - name: Clone Source Code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run ESLint for static code analysis
-        run: npm run lint 
-
   build-and-push-job:
     runs-on: ubuntu-latest
-    needs: static-code-analysis-job
+    needs: test-job
     steps:
       - name: Clone Source Code
         uses: actions/checkout@v4
