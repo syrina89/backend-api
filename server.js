@@ -1,22 +1,27 @@
 import express from "express";
 import dotenv from "dotenv";
-import path from "path";
 import mongoose from "mongoose";
+import cors from "cors"; // Import CORS
 import productRoutes from "./routes/product.route.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve();
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(express.json());
+app.use(cors()); // Enable CORS for all routes
 
 // Database Connection
 async function connectDB() {
+  if (process.env.NODE_ENV === "test") {
+    // Skip MongoDB connection if in test environment
+    console.log("Skipping MongoDB connection in test environment.");
+    return;
+  }
+
   try {
-    console.log("Connecting to MongoDB...");
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB connected successfully!");
   } catch (error) {
@@ -34,15 +39,11 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes);
 
-// Production setup
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend", "dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+// Start Server only if not in test environment
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`Server started at http://localhost:${PORT}`);
   });
 }
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server started at http://localhost:${PORT}`);
-});
+export { app };  // Export app for testing
