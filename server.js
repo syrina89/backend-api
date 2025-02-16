@@ -50,7 +50,7 @@ app.get("/health", async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: "DOWN",
-      message: "App or Database is experiencing issues...",
+      message: "App or Database is experiencing issues.",
       database: "Disconnected",
     });
   }
