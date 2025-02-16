@@ -44,7 +44,7 @@ app.get("/health", async (req, res) => {
     await mongoose.connection.db.admin().ping();
     res.status(200).json({
       status: "UP",
-      message: "App is running smoothly.",
+      message: "App is running smoothly. - test ",
       database: "Connected",
     });
   } catch (err) {
