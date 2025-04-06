@@ -1,0 +1,26 @@
+name: pipeline backend
+
+on:
+     push:
+          branches:
+               - main
+
+
+
+jobs: 
+    test:
+        runs: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+
+            - name: check folders and files
+              run: |
+                echo "checking folders and files....."
+                ls -l
+                echo "folders and files checked"
+
+            - name: check node version
+                echo "checking node version....."
+                node -v
+                echo "node version checked"

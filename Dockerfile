@@ -1,20 +1,14 @@
-# Use official Node.js 14 as base image
-FROM  --platform=linux/amd64 node:18
-
-# Set working directory
+#creer une image de node 18
+FROM node:18
+#creer un workdir
 WORKDIR /usr/src/app
-
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the server code
+#copier le fichier package .json dans le path relatif
+COPY package.json  .
+#installer les dependencies
+RUN npm install --force
+#copier le reste des fichiers 
 COPY . .
-
-# Expose port 3000 for the server
+# 
 EXPOSE 3001
-
-# Default command to start the application
-CMD ["npm", "start"]
+#
+CMD [ "npm","start" ]
