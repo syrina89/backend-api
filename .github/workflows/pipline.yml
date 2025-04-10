@@ -1,15 +1,12 @@
 name: pipeline backend
-
 on:
-     push:
-          branches:
-               - main
-
-
+    push:
+        branches:
+             - main
 
 jobs: 
     test:
-        runs: ubuntu-latest
+        runs-on: ubuntu-latest
         steps:
             - name: checkout
               uses: actions/checkout@v4
@@ -21,6 +18,8 @@ jobs:
                 echo "folders and files checked"
 
             - name: check node version
+              run: |
                 echo "checking node version....."
                 node -v
                 echo "node version checked"
+
