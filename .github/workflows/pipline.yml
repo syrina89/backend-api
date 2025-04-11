@@ -34,11 +34,11 @@ jobs:
             - name: build docker image
               run: docker build -t syrina89/back-session7 .
             
-           # - #name: login to docker Hub
-            #  uses: docker/login-action@v3
-             # with:
-              #  username: ${{ vars.DOCKERHUB_USERNAME }}
-               # password: ${{ secrets.DOCKERHUB_TOKEN }}
+            - name: login to docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ vars.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
 
