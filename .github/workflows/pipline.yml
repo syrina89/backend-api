@@ -25,11 +25,14 @@ jobs:
     deploy:
       runs-on: ubuntu-latest
       steps:
-        - name: Connect via SSH and execute commands
+        - name: Execute SSH Commands
           uses: appleboy/ssh-action@v1
           with:
-            host: ${{ secrets.HOST }}
-            username: user
-            password: ${{ secrets.PASSWORD }}
-            script: |
-              echo "Connected successfully"
+                host: ${{ secrets.SSH_HOST }}  # <-- OBLIGATOIRE
+                username: ${{ secrets.SSH_USERNAME }}
+                password: ${{ secrets.SSH_PASSWORD }}  # Ou 'key' pour une clé SSH
+                port: 22
+                script: |
+                  echo "Connexion réussie !"
+                  echo "User: $(whoami)"
+                  echo "OS: $(uname -a)"
