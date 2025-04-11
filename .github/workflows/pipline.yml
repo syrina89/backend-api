@@ -32,8 +32,9 @@ jobs:
           - name: SSH Debug
             uses: appleboy/ssh-action@v1
             with:
-              host: ${{ secrets.SSH_HOST }}
-              username: ${{ secrets.SSH_USERNAME }}
+              host: ${{ secrets.HOST }}
+              username: user
+              password: ${{ secrets.PASSWORD }}
               
               port: 22
               script: |
