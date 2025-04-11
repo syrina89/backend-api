@@ -32,10 +32,9 @@ jobs:
           - name: SSH Debug
             uses: appleboy/ssh-action@v1
             with:
-              host: ${{ secrets.HOST }}
+              host: 92.113.146.180
               username: user
-              password: ${{ secrets.PASSWORD }}
-              
+              password: vps-123456789
               port: 22
               script: |
                 echo "Connexion réussie !"
