@@ -23,3 +23,22 @@ jobs:
                 node -v
                 echo "node version checked"
 
+    build-and-push:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+
+            - name: checkout
+              uses: actions/checkout@v4
+
+            - name: build docker image
+              run: docker build -t syrina89/back-session7 .
+            
+            - name: login to docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ vars.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+
