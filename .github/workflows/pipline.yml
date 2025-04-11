@@ -39,7 +39,7 @@ jobs:
               with:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}
-            - name: push docker img
+            - name: push docker image
               run: docker push syrina89/back-session7:latest
 
             - name: tag image with version number
