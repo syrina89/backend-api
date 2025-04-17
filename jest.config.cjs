@@ -4,5 +4,6 @@ module.exports = {
       '^.+\\.js$': 'babel-jest',  // Use babel-jest for transforming JS files
     },
     testEnvironment: 'node',  // Ensure you're using the Node.js environment
+    reporters: ["default", "jest-json-reporter"],
   };
-  
+ 
