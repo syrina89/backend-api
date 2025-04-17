@@ -24,7 +24,7 @@ jobs:
               run: |
                  rm -rf test-report
                  mkdir test-report
-                 npm run test --json --outputFile=test-report/test-report.json
+                 npm run test --json --outputFile=test-report\test-report.json
   #               cat test-report/test-report.json
 
 
