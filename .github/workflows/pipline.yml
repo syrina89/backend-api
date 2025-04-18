@@ -29,13 +29,13 @@ jobs:
                 ls -la test-report/ 
                 cat test-report/output.json
 
-            - name: Upload test report
-              if: always() 
-             
-              uses: actions/upload-artifact@v4
-              with:
-                  name: test-report
-                  path: test-report/
+            - name: Debug output dir
+              run: |
+                  echo "Listing test-report content..."
+                  ls -la test-report/
+                  echo "Content of output.json:"
+                  cat test-report/output.json || echo "output.json not found"
+
 
           
 
