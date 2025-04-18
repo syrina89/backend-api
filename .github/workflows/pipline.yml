@@ -25,9 +25,11 @@ jobs:
               run: |
                 rm -rf test-report
                 mkdir -p test-report
-                npm run test -- --json --outputFile=test-report/output.json || echo "Tests failed but continuing"
-                ls -la test-report/ 
-                cat test-report/output.json
+                npm run test -- --json --outputFile=test-report/output.json 
+              continue-on-error: true
+
+ #           - name: cat test result
+ #            run: cat test-report/output.json
 
             - name: Debug output dir
               run: |
