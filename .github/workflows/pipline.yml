@@ -26,12 +26,12 @@ jobs:
                 rm -rf test-report
                 mkdir -p test-report
                 npm run test -- --json --outputFile=test-report/output.json || echo "Tests failed but continuing"
-                ls -la test-report/ # Pour vérifier le contenu dans les logs
+                ls -la test-report/ 
                 cat test-report/output.json
 
             - name: Upload test report
               if: always() 
-                # S'exécute même si les tests échouent
+             
               uses: actions/upload-artifact@v4
               with:
                   name: test-report
