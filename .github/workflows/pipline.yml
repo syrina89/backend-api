@@ -79,12 +79,21 @@ jobs:
         runs-on: ubuntu-latest
         needs: test
         steps:
+            - name: Notify Build Start
+              uses: act10ns/slack@v2
+              with:
+                status: starting
+                message: |
+                    *Docker Build Started*
+                    Building image ${{ env.IMAGE_NAME }}
+                    Branch: ${{ github.ref }}
+                    Run Number: ${{ env.BUILD_NUMBER }}
 
             - name: checkout
               uses: actions/checkout@v4
 
             - name: build docker image
-              run: docker build -t ${{env.IMAGE_NAME}} .
+              run: docker build -t ${{env.IMAGE_NAME}} . || echo "::set-output name=status::failure"
             
             - name: login to docker Hub
               uses: docker/login-action@v3
@@ -98,6 +107,19 @@ jobs:
 
             - name: push docker image
               run: docker push ${{env.IMAGE_NAME}}:latest
+
+            - name: Notify Deployment Results
+              if: always()
+              uses: act10ns/slack@v2
+              with:
+                  status: ${{ steps.deploy.outcome == 'failure' && 'failure' || 'success' }}
+                  channel: "#workflows"
+                  message: |
+                      *Deployment Results* (${{ job.status }})
+                      Version: ${{ env.BUILD_NUMBER }}
+                      ${{ steps.deploy.outcome == 'failure' && ':x: Deployment failed!' || ':white_check_mark: Deployment succeeded!' }}
+                      ${{ steps.deploy.outcome == 'failure' && 'Check the workflow run for deployment errors.' || 'Application successfully deployed!' }}
+              
     deploy:
       runs-on: ubuntu-latest
       needs: build-and-push
