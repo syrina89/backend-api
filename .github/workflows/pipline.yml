@@ -10,6 +10,7 @@ on:
 env:
   IMAGE_NAME: syrina89/back-session7
   BUILD_NUMBER: github.run_number
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 jobs: 
     test:
         runs-on: ubuntu-latest
@@ -57,13 +58,13 @@ jobs:
                 "
 
  #           - name: cat test result
- #            run: cat test-report/output.json
+ #            run: cat test-report/output.json   
+            - uses: act10ns/slack@v2
+              with:
+                status: ${{ job.status }}
+                steps: ${{ toJson(steps) }}
+              if: always()
 
-            
-        
-
-
-          
 
     build-and-push:
         runs-on: ubuntu-latest
