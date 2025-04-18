@@ -35,6 +35,11 @@ jobs:
                   ls -la test-report/
                   echo "Content of output.json:"
                   cat test-report/output.json || echo "output.json not found"
+            - name: Upload test report
+              uses: actions/upload-artifact@v3
+              with:
+                name: test-report
+                path: test-report/output.json
 
 
           
