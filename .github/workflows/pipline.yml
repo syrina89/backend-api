@@ -22,31 +22,10 @@ jobs:
 
             - name: Unit Test
               run: |
-
                  rm -rf test-report
-                 mkdir -p test-report && chmod 755 test-report # -p pour éviter les erreurs si le dossier existe
-                 npm run test -- --json --outputFile=test-report/test-report.json
-                 #rm -rf test-report
-                 #mkdir test-report
-                 #npm run test --json --outputFile=test-report\test-report.json
-                 cat test-report/test-report.json
-
-
-  #              --json --outputFile=test-report/test-report.json
-                
-                
-
-   #         - name: check folders and files
-   #          run: |
-   #            echo "checking folders and files....."
-    #            ls -l
-     #           echo "folders and files checked"
-#
- #           - name: check node version
-  #            run: |
-   #""             echo "checking node version....."
-     #           node -v
-      #          echo "node version checked"
+                 mkdir -p test-report && chmod 755 test-report 
+                 npm run test -- --json --outputFile=test-report/output.json
+                 cat test-report/output.json
 
     build-and-push:
         runs-on: ubuntu-latest

@@ -23,6 +23,7 @@
     "@babel/register": "^7.25.9",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
+    "jest-ctrf-json-reporter": "^0.0.9",
     "jest-json-reporter": "^1.2.2",
     "nodemon": "^3.1.9",
     "supertest": "^7.0.0"
